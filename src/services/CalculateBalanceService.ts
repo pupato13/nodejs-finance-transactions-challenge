@@ -1,18 +1,20 @@
 import Transaction from '../models/Transaction';
 import Balance from '../models/Balance';
 
-interface Request {
-  transactions: Transaction[];
-}
-
 class CalculateBalanceService {
-  public execute(transactions: Transaction[]): Balance {
+  private transactions: Transaction[];
+
+  constructor(transactions: Transaction[]) {
+    this.transactions = transactions;
+  }
+
+  public execute(): Balance {
     const balance = new Balance();
 
-    const incomeTransactions = transactions.filter(
+    const incomeTransactions = this.transactions.filter(
       transaction => transaction.type === 'income',
     );
-    const outcomeTransactions = transactions.filter(
+    const outcomeTransactions = this.transactions.filter(
       transaction => transaction.type === 'outcome',
     );
 

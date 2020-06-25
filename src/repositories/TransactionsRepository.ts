@@ -27,9 +27,11 @@ class TransactionsRepository {
 
   public getBalance(): Balance {
     // TODO
-    const calculateBalanceService = new CalculateBalanceService();
+    const calculateBalanceService = new CalculateBalanceService(
+      this.transactions,
+    );
 
-    const balance = calculateBalanceService.execute(this.transactions);
+    const balance = calculateBalanceService.execute();
 
     return balance;
   }
